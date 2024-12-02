@@ -28,6 +28,13 @@ use Net::SSL;
 # $ENV{HTTPS_VERSION} = 3;
 # $ENV{PERL_LWP_SSL_VERIFY_HOSTNAME} = 0;
 
+##################
+# or this syntax #
+##################
+    
+my $browser = LWP::UserAgent->new( ssl_opts => { verify_hostname => 0 }, );
+
+###################
 
 my $August_2023 = 'https://xxxx.com/year/month/page';
 
@@ -38,13 +45,6 @@ mkdir ("$base_dir/") unless -d ("$base_dir");
 chdir "$base_dir" or die "Need to move into directory";
                    
 sub downloader {
-
-    ##################
-    # or this syntax #
-    ##################
-    
-	my $browser = LWP::UserAgent->new( ssl_opts => { verify_hostname => 0 }, );
-	
 	
 	my ($url) = @_;
 	my $response = $browser->get($url);
