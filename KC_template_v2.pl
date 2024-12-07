@@ -43,6 +43,19 @@ if ($response->is_success) {
         print "Image source: $src\n" if $src;
     }
 
+    # Extract and print all paragraphs (<p>)
+    my @paragraphs = $tree->find_by_tag_name('p');
+    foreach my $p (@paragraphs) {
+        print "Paragraph text: " . $p->as_text . "\n";
+    }
+
+    # Extract and print elements with specific class or id
+    my $content_div = $tree->look_down(_class => 'content');
+    print "Content from class 'content': " . $content_div->as_text . "\n" if $content_div;
+
+    my $div_with_id = $tree->look_down(_id => 'main');
+    print "Content from ID 'main': " . $div_with_id->as_text . "\n" if $div_with_id;
+
     # Clean up
     $tree = $tree->delete;
 } else {
